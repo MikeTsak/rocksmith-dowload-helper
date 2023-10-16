@@ -1,0 +1,1 @@
+# rocksmith-dowload-helper
