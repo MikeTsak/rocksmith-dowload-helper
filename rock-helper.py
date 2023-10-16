@@ -5,6 +5,9 @@ import PySimpleGUI as sg
 import threading
 import webbrowser
 
+sg.theme('DarkGrey5')
+sg.set_options(font=('Arial Bold', 10))
+
 def move_psarc_files(source_path, destination_path, window):
     # Check if both source and destination directories exist
     if not os.path.exists(source_path) or not os.path.exists(destination_path):
@@ -22,16 +25,16 @@ def move_psarc_files(source_path, destination_path, window):
                 shutil.move(source_file, destination_file)
                 window.write_event_value('-FILE_MOVED-', file)
         
-        time.sleep(10)  # Sleep for 10 seconds before checking again
+        time.sleep(5)  # Sleep for 5 seconds before checking again
 
 def main():
     layout = [
-        [sg.Text("Enter the source path:"), sg.InputText(key='-SOURCE-'), sg.FolderBrowse()],
-        [sg.Text("Enter the destination path:"), sg.InputText(key='-DEST-'), sg.FolderBrowse()],
+        [sg.Text("Enter the dowload path:"), sg.InputText(key='-SOURCE-'), sg.FolderBrowse()],
+        [sg.Text("Enter the Rocksmith2014\dlc path:"), sg.InputText(key='-DEST-'), sg.FolderBrowse()],
         [sg.Button('Start'), sg.Button('Exit'), sg.Button('Open Site')],
         [sg.Listbox(values=[], size=(50, 10), key='-FILE_LIST-')],
         [sg.Text("", size=(50,1), key='-STATUS-')],
-        [sg.Text("Not Started", size=(20,1), key='-INDICATOR-', text_color='red')]
+        [sg.Text("Not Started", size=(20,1), key='-INDICATOR-', text_color='red'),sg.Text(" ", size=(35,1)), sg.Text("made by miketsak.gr")],
     ]
 
     window = sg.Window("PSARC File Mover", layout)
